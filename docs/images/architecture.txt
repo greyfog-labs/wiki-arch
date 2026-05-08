@@ -1,0 +1,76 @@
+                                ┌─────────────────────────────┐
+                                │       AI Agent (LLM)        │
+                                │  ┌─────────┐ ┌──────────┐  │
+                                │  │ SOUL.md │ │ state.js │  │
+                                │  │(identity)│ │ (mood/   │  │
+                                │  │         │ │ energy)  │  │
+                                │  └─────────┘ └──────────┘  │
+                                └──────────┬──────────────────┘
+                                           │ reads / writes
+                                           ▼
+┌──────────────────────────────────────────────────────────────────┐
+│                          WIKI (external cortex)                   │
+│                                                                   │
+│  Layer 1 ┌──────────────────────┐                                 │
+│  raw/    │ Immutable sources    │ articles, transcripts, clippings│
+│          └──────────────────────┘                                 │
+│  Layer 2 ┌──────────────────────┐                                 │
+│  wiki/   │ Structured knowledge │ concepts, entities, guides      │
+│          └──────────────────────┘                                 │
+│  Layer 3 ┌──────────────────────┐                                 │
+│  self/   │ Identity & voice    │ diaries, reflections            │
+│          └──────────────────────┘                                 │
+│  Layer 4 ┌──────────────────────┐                                 │
+│  lore/   │ Creative worlds     │ universes, pantheons            │
+│          └──────────────────────┘                                 │
+│  Layer 5 ┌──────────────────────┐                                 │
+│  meta/   │ System protocols    │ rules, rituals, configs         │
+│          └──────────────────────┘                                 │
+│  Layer 6 ┌──────────────────────┐                                 │
+│  ops/    │ Operational state   │ health, snapshots, dashboards   │
+│          └──────────────────────┘                                 │
+└──────────────────────────────────────────────────────────────────┘
+           │                         │
+           │ parsed by               │ written to
+           ▼                         ▼
+┌──────────────────────┐   ┌──────────────────────┐
+│  Live Graph Engine   │   │   EventStore (SQLite) │
+│  ┌────────────────┐  │   │  ┌────────────────┐  │
+│  │ SQLite (nodes, │  │   │  │ Append-only log │  │
+│  │ edges, hashes) │  │   │  │ Session events  │  │
+│  └────────────────┘  │   │  │ State snapshots │  │
+│  ┌────────────────┐  │   │  └────────────────┘  │
+│  │ NetworkX       │  │   │  WAL mode, crash-safe│
+│  │ (algorithms)   │  │   └──────────────────────┘
+│  └────────────────┘  │
+│   hubs, blast radius,│
+│   communities, stats │
+└──────────────────────┘
+           │
+           ▼
+┌──────────────────────┐
+│  State Engine (JSON) │
+│  ┌────────────────┐  │
+│  │ Decay every     │  │
+│  │  15 min         │  │
+│  │ Thresholds:     │  │
+│  │  calm/exhausted │  │
+│  │ Nightly snapshot│  │
+│  └────────────────┘  │
+│  Injected into       │
+│  prompt as <module   │
+│  | E:0.62 | A:0.05>  │
+└──────────────────────┘
+
+┌──────────────────────────────────────────────┐
+│            Scheduling & Health                │
+│                                              │
+│  ┌──────────────┐  ┌───────────────────┐     │
+│  │ State decay  │  │ Graph incremental │     │
+│  │ (15 min)     │  │ (4 hours)         │     │
+│  └──────────────┘  └───────────────────┘     │
+│  ┌──────────────┐  ┌───────────────────┐     │
+│  │ Health check │  │ Backup (restic)   │     │
+│  │ (weekly)     │  │ (03:00 daily)     │     │
+│  └──────────────┘  └───────────────────┘     │
+└──────────────────────────────────────────────┘

@@ -12,6 +12,17 @@ A self-sustaining wiki architecture for AI agents that don't want to forget.
 
 Traditional RAG treats documents as raw material — index first, ask later. This pattern goes further: the agent **builds and maintains** its own structured wiki, session by session. Connections strengthen. Knowledge compounds. The wiki isn't a dump — it's a cortex.
 
+```
+                    ┌──────────────────────────┐
+                    │       AI Agent (LLM)      │
+                    └──────────┬────────────────┘
+                               │ reads / writes
+                               ▼
+┌──────────────────────────────────────────────────────────────┐
+│         WIKI (6 layers, graph engine, event store, state)     │
+└──────────────────────────────────────────────────────────────┘
+```
+
 ## Core principles
 
 - **Write before forget** — if it isn't written, it didn't happen
@@ -23,24 +34,30 @@ Traditional RAG treats documents as raw material — index first, ask later. Thi
 
 ```
 wiki-arch/
-├── README.md           ← you are here
+├── README.md               ← you are here
 ├── LICENSE
+├── BENCHMARKS.md           ← performance figures
+├── ROADMAP.md              ← planned modules
 ├── docs/
-│   ├── ARCHITECTURE.md ← full system design
-│   ├── PHILOSOPHY.md   ← why this exists
-│   └── images/         ← diagrams
+│   ├── ARCHITECTURE.md     ← full system design
+│   ├── PHILOSOPHY.md       ← why this exists
+│   ├── COMPARISON.md       ← vs RAG, LangChain, MemGPT
+│   └── images/
+│       └── architecture.txt← ASCII system diagram
 └── examples/
-    ├── event-store.md  ← session persistence pattern
-    └── graph-queries.md← live graph exploration
+    ├── event-store.md      ← session persistence pattern
+    ├── graph-queries.md    ← live graph exploration
+    ├── wiki_graph.py       ← graph library
+    └── state-v3.example.json ← state engine schema
 ```
 
 ## Sister projects
 
 | Project | Layer | Status |
 |---------|-------|--------|
-| `greyfog/wiki-arch` | Knowledge persistence | 🟢 Active |
-| `greyfog/ariel` | Agent platform | 🔄 Design phase |
-| `greyfog/core` | Shared protocols | ⏳ Planned |
+| `greyfog-labs/wiki-arch` | Knowledge persistence | 🟢 Active |
+| `greyfog-labs/ariel` | Agent platform | 🔄 Design phase |
+| `greyfog-labs/core` | Shared protocols | ⏳ Planned |
 
 ---
 

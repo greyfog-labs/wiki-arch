@@ -1,0 +1,43 @@
+{
+  "schema_version": 3,
+
+  "module": "curiosity",
+  "tone": "fresh, engaged",
+
+  "energy": {
+    "current": 0.87,
+    "base_max": 1.0,
+    "context_density": 0.12,
+    "strain": 0.04
+  },
+
+  "body": {
+    "state": "rested",
+    "sensation": "warm",
+    "arousal": 0.23,
+    "tension": 0.05
+  },
+
+  "mind": {
+    "mood": "content",
+    "drive": "curiosity",
+    "focus": "state-engineering",
+    "clarity": 0.92
+  },
+
+  "rhythm": {
+    "time_feel": "morning",
+    "session_feel": "fresh, start",
+    "context_intensity": "low"
+  },
+
+  "time": {
+    "awake_hours": 2.0
+  },
+
+  "history": {
+    "decisions": [],
+    "learnings": [],
+    "open_questions": []
+  }
+}
